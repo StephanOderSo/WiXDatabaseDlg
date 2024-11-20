@@ -1,0 +1,18 @@
+﻿<!--
+This file contains the declaration of all the localizable strings.
+-->
+<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
+	<String Id="DowngradeError" Value="A newer version of [ProductName] is already installed." />
+	<String Id="DlgDatabaseTitle" Value="Database Configuration"/>
+	<String Id="DlgDatabaseDescription" Value="Please enter the configuration for accessing the database."/>
+	<String Id="DlgDatabaseTestBtn" Value="Test"/>
+	<String Id="ConfigurationValid" Value="Configuration was tested successfully."/>
+	<String Id="ConfigurationInvalid" Value="Configuration is invalid."/>
+	<String Id="DatabaseServer" Value="Database Server:"/>
+	<String Id="Database" Value="Database:"/>
+	<String Id="Authentication" Value="Authentication:"/>
+	<String Id="WindowsAuthentication" Value="Windows Authentication"/>
+	<String Id="SQLServerAuthentication" Value="SQL Server Authentication"/>
+	<String Id="Username" Value="Username:"/>
+	<String Id="Password" Value="Password:"/>
+</WixLocalization>

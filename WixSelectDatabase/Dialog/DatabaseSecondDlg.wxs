@@ -1,0 +1,46 @@
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Fragment>
+		
+		<UI>
+			<Dialog Id="DatabaseSecondDlg" Width="370" Height="270" Title="!(loc.WelcomeDlg_Title)">
+				<Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)"/>
+				<Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+					<Publish Event="SpawnDialog" Value="CancelDlg" />
+				</Control>
+				<!--<Control Id="Bitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="!(loc.WelcomeDlgBitmap)" />-->
+				<Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+
+
+				<Control Id="Title" Type="Text" X="15" Y="6" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}!(loc.DlgDatabaseTitle)" />
+				<Control Id="Description" Type="Text" X="25" Y="23" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.DlgDatabaseDescription)" ShowCondition="NOT Installed OR NOT PATCH" HideCondition="Installed AND PATCH" />
+				<Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
+				<Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+
+				<Control Id="ServerText" Type="Text" X="20" Y="50" Width="100" Height="30" NoPrefix="yes" Text="!(loc.DatabaseServer)"/>
+				<Control Disabled="true" Id ="ServerTextEdit" Type="Edit" Property="DBSERVERPROP" X="120" Y="50" Width="150" Height="18"/>
+				
+				<Control Id="DatabaseText" Type="Text" X="20" Y="70" Width="100" Height="30" NoPrefix="yes" Text="!(loc.Database)"/>
+				<!--<Control Id ="DatabaseTextEdit" Type="Edit" Property="DBPROP" X="120" Y="70" Width="150" Height="18"/>-->
+				<Control Id="DatabaseComboBox" Type="ComboBox" Property="DATABASECOMBOBOXPROP"  X="120" Y="70" Width="150" Height="18">
+					<ComboBox Property="DATABASECOMBOBOXPROP"/>
+				</Control>
+
+				<Control Id="AuthenticationText" Type="Text" X="20" Y="100" Width="100" Height="30" NoPrefix="yes" Text="!(loc.Authentication)"/>
+				<Control Disabled="true" Id="TrustedConnectionEdit" Type="Edit" X="120" Y="100" Height="20" Width="150" Property="DBTRUSTEDCONNECTIONPROP"/>
+				
+				<Control Id="UserText" Type="Text" X="35" Y="125" Width="95" Height="30" NoPrefix="yes" Text="!(loc.Username)" EnableCondition="DBTRUSTEDCONNECTIONPROP=0" DisableCondition="DBTRUSTEDCONNECTIONPROP=1"/>
+				<Control Disabled="true" Id ="UserTextEdit" Type="Edit" Property="DBUSERPROP" X="130" Y="125" Width="140" Height="18"/>
+				
+				<Control Id="PasswordText" Type="Text" X="35" Y="145" Width="95" Height="30" NoPrefix="yes" Text="!(loc.Password)" EnableCondition="DBTRUSTEDCONNECTIONPROP=0" DisableCondition="DBTRUSTEDCONNECTIONPROP=1"/>
+				<Control Disabled="true" Id ="PasswordTextEdit" Type="Edit" Password="yes" Property="DBUSERPASSWORDPROP" X="130" Y="145" Width="140" Height="18"/>
+					
+				<Control Id ="TestConnectionButton" Type="PushButton" X="20" Y="210" Width="60" Height="18" Text="!(loc.DlgDatabaseTestBtn)">
+					<Publish Event="DoAction" Value="CA_TestConnectionString" />
+				</Control>
+				<Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+			</Dialog>
+		</UI>
+	</Fragment>
+
+</Wix>

@@ -1,0 +1,45 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:ui ="http://wixtoolset.org/schemas/v4/wxs/ui"
+	 >
+	<Package Name="WixSelectDatabase" Manufacturer="TODO Manufacturer" Version="1.0.0.0" UpgradeCode="ed1b9921-3ab5-49cc-a7b9-bd89b6611533">
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Property Id="MsiLogging" Value="v!" />
+
+
+		<Binary Id="CA_Binary" SourceFile="..\CustomAction\bin\Debug\net48\CustomAction.CA.dll"/>
+		<CustomAction Id="CA_UpdateDatabase" BinaryRef="CA_Binary" DllEntry="CA_UpdateDatabase" Return="check" />
+		<CustomAction Id="CA_TestConnectionString" BinaryRef="CA_Binary" DllEntry="CA_TestConnectionString" Return="check" />
+		<CustomAction Id="CA_LoadDatabaseInfo" BinaryRef="CA_Binary" DllEntry="CA_LoadDatabaseInfo" Return="check" Execute="immediate"/>
+
+		<Property Id="DBSERVERPROP" Value="localhost\sqlexpress"/>
+		<Property Id="DBPROP" Value="hnpps"/>
+		<Property Id="DBTRUSTEDCONNECTIONPROP" Value="0"/>
+		<Property Id="DBUSERPROP" />
+		<Property Id="DBUSERPASSWORDPROP"/>
+		<Property Id="MINDBVERSION" Value="300"/>
+		<Property Id="MAXDBVERSION" Value="316"/>
+		<Property Id="INSTANCEISRUNNING" Value="0"/>
+		
+		
+		<!--<InstallExecuteSequence>
+			<Custom Action="CA_LoadDatabaseInfo" After="AppSearch" Condition="NOT Installed"/>
+		</InstallExecuteSequence>
+
+		<InstallUISequence>
+			--><!--<Custom Action="CA_LoadDatabaseInfo" After="CostFinalize" Overridable="yes" Condition="NOT Installed"/>--><!--
+			--><!--<Custom Action="CA_LoadDatabaseInfo" After="CostFinalize" Overridable="yes" Condition="NOT Installed"/>--><!--
+			<Custom Action="CA_LoadDatabaseInfo" After="AppSearch" Condition="NOT Installed"/>
+
+		</InstallUISequence>-->
+
+		<ui:WixUI Id="WixUI_InstallDir_NoLicense" InstallDirectory="INSTALLFOLDER"/>
+
+
+		<Feature Id="Main">
+			<ComponentGroupRef Id="ExampleComponents" />
+		</Feature>
+	</Package>
+</Wix>

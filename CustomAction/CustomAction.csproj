@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="CustomAction.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Dtf.CustomAction" Version="5.0.2" />
+    <PackageReference Include="WixToolset.Dtf.WindowsInstaller" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DBUpdater">
+      <HintPath>..\..\..\HanicWiXToolsAndComponents\DBUpdater\bin\Release\DBUpdater.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

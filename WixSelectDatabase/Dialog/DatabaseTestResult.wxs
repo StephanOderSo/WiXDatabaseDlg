@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Fragment>
+		<UI>
+			<Dialog Id="DbTestResultDlg" Width="260" Height="85" Title="!(loc.CancelDlg_Title)">
+				<Control Id="Ok" Type="PushButton" X="102" Y="57" Width="56" Height="17" Text="!(loc.WixUIOK)">
+					<Publish Event="EndDialog" Value="Return" />
+				</Control>
+				<Control HideCondition="CONNECTIONSTRINGTESTRESULT=0" Id="TextUngueltig" Type="Text" X="48" Y="25" Width="194" Height="30" NoPrefix="yes" Text="!(loc.ConfigurationValid)" />
+				<Control HideCondition="CONNECTIONSTRINGTESTRESULT=1" Id="TextGueltig" Type="Text" X="48" Y="25" Width="194" Height="30" NoPrefix="yes" Text="!(loc.ConfigurationInvalid)" />
+				<Control Id="Icon" Type="Icon" X="15" Y="15" Width="24" Height="24" ToolTip="!(loc.CancelDlgIconTooltip)" FixedSize="yes" IconSize="32" Text="!(loc.CancelDlgIcon)" />
+			</Dialog>
+		</UI>
+	</Fragment>
+</Wix>
