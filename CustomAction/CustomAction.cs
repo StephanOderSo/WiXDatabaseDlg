@@ -62,6 +62,8 @@ namespace CustomAction
                 session.Log($"Property DBSERVERPROP: {session["DBSERVERPROP"]} ");
                 string connectionstring = GenerateConnectionString(session);
 
+                session["ConnectionStringProp"] = connectionstring;
+
                 StringBuilder logInfo = new StringBuilder();
                 if (DBUpdater.CheckConnectionString(connectionstring, ref logInfo))
                     session["CONNECTIONSTRINGTESTRESULT"] = "1";
@@ -82,28 +84,33 @@ namespace CustomAction
         [CustomAction]
         public static ActionResult CA_LoadDatabaseInfo(Session session)
         {
+            System.Diagnostics.Debugger.Launch();
             session.Log("Begin CA_LoadDatabaseInfo");
             string controlType = "ComboBox"; // Type der Control
-            //server=localhost\\SQLEXPRESS;trusted_connection=true;database=master
             List<string> dbNameList = DBUpdater.ReadDbNames(GenerateConnectionString(session, true));
-            if(dbNameList == null)
+            if(dbNameList == null || dbNameList.Count == 0)
             {
                 session.Log("Error while loading Database Names");
-                return ActionResult.Failure;
+                return ActionResult.SkipRemainingActions;
             }
 
             try
             {
-                View view = session.Database.OpenView($"SELECT * FROM {controlType}");
+                //ggf. altlasten loswerden
+                session.Database.Execute($"DELETE FROM {controlType} WHERE Property = 'DATABASECOMBOBOXPROP'");
 
+                View view = session.Database.OpenView($"SELECT * FROM {controlType}");
                 view.Execute();
+
                 session.Log("Executed View");
+
+
 
                 int index = 1;
                 foreach (string dbName in dbNameList)
                 {
                     Record record = session.Database.CreateRecord(4);
-
+                    
                     record.SetString(1, "DATABASECOMBOBOXPROP");
                     record.SetInteger(2, index++);
                     record.SetString(3, dbName);
@@ -112,7 +119,7 @@ namespace CustomAction
                     view.Modify(ViewModifyMode.InsertTemporary, record);
                 }
 
-            
+
 
 
                 session.Log("Modified View");
@@ -132,7 +139,7 @@ namespace CustomAction
         {
             string connectionstring;
             string server = session["DBSERVERPROP"];
-            string database = masterDb ? "master" : session["DBPROP"];
+            string database = masterDb ? "master" : session["DATABASECOMBOBOXPROP"];
             bool trustedConnection = session["DBTRUSTEDCONNECTIONPROP"] == "1" ? true : false;
             if (!trustedConnection)
             {

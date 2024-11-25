@@ -15,14 +15,16 @@
 		<CustomAction Id="CA_LoadDatabaseInfo" BinaryRef="CA_Binary" DllEntry="CA_LoadDatabaseInfo" Return="check" Execute="immediate"/>
 
 		<Property Id="DBSERVERPROP" Value="localhost\sqlexpress"/>
-		<Property Id="DBPROP" Value="hnpps"/>
+		<!--<Property Id="DBPROP" Value="hnpps"/>-->
 		<Property Id="DBTRUSTEDCONNECTIONPROP" Value="0"/>
 		<Property Id="DBUSERPROP" />
 		<Property Id="DBUSERPASSWORDPROP"/>
 		<Property Id="MINDBVERSION" Value="300"/>
 		<Property Id="MAXDBVERSION" Value="316"/>
 		<Property Id="INSTANCEISRUNNING" Value="0"/>
-		
+
+		<Property Id="DBTRUSTEDCONNECTIONPROP_SecondDlg"/>
+		<CustomAction Id="SetDBTRUSTEDCONNECTIONPROP_SecondDlg" Property="DBTRUSTEDCONNECTIONPROP_SecondDlg" Value="[DBTRUSTEDCONNECTIONPROP]" Execute="firstSequence"/>
 		
 		<!--<InstallExecuteSequence>
 			<Custom Action="CA_LoadDatabaseInfo" After="AppSearch" Condition="NOT Installed"/>
