@@ -84,7 +84,6 @@ namespace CustomAction
         [CustomAction]
         public static ActionResult CA_LoadDatabaseInfo(Session session)
         {
-            System.Diagnostics.Debugger.Launch();
             session.Log("Begin CA_LoadDatabaseInfo");
             string controlType = "ComboBox"; // Type der Control
             List<string> dbNameList = DBUpdater.ReadDbNames(GenerateConnectionString(session, true));

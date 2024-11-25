@@ -25,20 +25,8 @@
 
 		<Property Id="DBTRUSTEDCONNECTIONPROP_SecondDlg"/>
 		<CustomAction Id="SetDBTRUSTEDCONNECTIONPROP_SecondDlg" Property="DBTRUSTEDCONNECTIONPROP_SecondDlg" Value="[DBTRUSTEDCONNECTIONPROP]" Execute="firstSequence"/>
-		
-		<!--<InstallExecuteSequence>
-			<Custom Action="CA_LoadDatabaseInfo" After="AppSearch" Condition="NOT Installed"/>
-		</InstallExecuteSequence>
-
-		<InstallUISequence>
-			--><!--<Custom Action="CA_LoadDatabaseInfo" After="CostFinalize" Overridable="yes" Condition="NOT Installed"/>--><!--
-			--><!--<Custom Action="CA_LoadDatabaseInfo" After="CostFinalize" Overridable="yes" Condition="NOT Installed"/>--><!--
-			<Custom Action="CA_LoadDatabaseInfo" After="AppSearch" Condition="NOT Installed"/>
-
-		</InstallUISequence>-->
 
 		<ui:WixUI Id="WixUI_InstallDir_NoLicense" InstallDirectory="INSTALLFOLDER"/>
-
 
 		<Feature Id="Main">
 			<ComponentGroupRef Id="ExampleComponents" />
